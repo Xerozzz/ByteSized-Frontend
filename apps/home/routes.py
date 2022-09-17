@@ -16,25 +16,19 @@ import requests
 @blueprint.route('/index', methods = ['GET', 'POST'])
 @login_required
 def index():
-    link = ""
-    # if request.method == "POST":
-    #     data = {
-    #         "original" : request.form["original"],
-    #         "alias" : request.form["alias"],
-    #         "username" : current_user.username,
-    #         "tag" : []
-    #     }
-    #     res = requests.post("http://localhost:5000/create", json=data)
-    #     if res.status_code == 200:
-    #         link = res.text
-    #     else:
-    #         flash("ERROR: Link Creation Failed")
-
-    res = requests.get(f"http://localhost:5000/{current_user.username}/all_clicks") # NEED UPDATE USERNAME
-    clicks = res.json()
-    res = requests.get(f"http://localhost:5000/{current_user.username}/stats") # NEED UPDATE USERNAME
-    stats = res.json()
-    return render_template('home/index.html', segment='index', link = link, clicks = clicks, stats = stats)
+    # res = requests.get(f"http://localhost:5000/{current_user.username}/all_clicks") 
+    # clicks = res.json()
+    res = requests.get(f"http://localhost:5000/{current_user.username}/stats")
+    data = res.json()
+    clicks = 0
+    for i in data:
+        clicks += i["clicks"]
+    stats = {
+        "data": data,
+        "links": len(data),
+        "clicks": clicks
+    }
+    return render_template('home/index.html', segment='index', stats = stats)
 
 @blueprint.route('/<template>')
 @login_required

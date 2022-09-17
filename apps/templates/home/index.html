@@ -48,7 +48,7 @@
                                                     <i class="feather icon-zap f-30 text-c-green"></i>
                                                 </div>
                                                 <div class="col">
-                                                    <h3 class="f-w-300">{{ clicks["clicks"] }}</h3>
+                                                    <h3 class="f-w-300">{{ stats["clicks"] }}</h3>
                                                     <span class="d-block text-uppercase">TOTAL CLICKS</span>
                                                 </div>
                                             </div>
@@ -59,7 +59,7 @@
                                                     <i class="feather icon-zap f-30 text-c-green"></i>
                                                 </div>
                                                 <div class="col">
-                                                    <h3 class="f-w-300">{{ clicks["links"] }}</h3>
+                                                    <h3 class="f-w-300">{{ stats["links"] }}</h3>
                                                     <span class="d-block text-uppercase">TOTAL LINKS</span>
                                                 </div>
                                             </div>
@@ -84,7 +84,7 @@
                                                             <th>Clicks</th>
                                                             <th>Delete</th>
                                                         </tr>
-                                                        {% for stat in stats %}
+                                                        {% for stat in stats["data"] %}
                                                             <tr id="row-{{ stat["alias"] }}">
                                                                 <td>
                                                                     <h6 class="mb-1">{{ stat["alias"] }}</h6>
